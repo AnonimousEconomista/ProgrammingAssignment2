@@ -1,36 +1,35 @@
 ## makeCacheMatrix finds the inverse of an invertible matrix x and caches result
-## cacheSolve finds inverse of invertible matrix x but first checks if result has already been cached
 
-## Write a short comment describing this function
+
 
 makeCacheMatrix <- function(x = matrix()) {
 
-        m <- NULL
+        inv <- NULL
         set <- function(y) {
                 x <<- y
-                m <<- NULL
+                inv <<- NULL
         }
         get <- function() x
-        setcache <- function(solve) m <<- inverse
-        getcache <- function() m
+        setInverse <- function(solveMatrix) inv <<- solveMatrix
+        getInverse <- function() inv
         list(set = set, get = get,
-             setcache = setcache,
-             getcache = getcache)
+             setInverse = setInverse,
+             getInverse = getInverse)
 }
 }
 
 
-## Write a short comment describing this function
+## cacheSolve finds inverse of invertible matrix x but first checks if result has already been cached
 
 cacheSolve <- function(x, ...) {
-  m <- x$getcache()
-        if(!is.null(m)) {
+  m <- x$getInverse()
+        if(!is.null(inv) {
                 message("getting cached data")
-                return(m)
+                return(inv)
         }
         data <- x$get()
-        m <- mean(data, ...)
-        x$setcache(m)
-        m
+        inv <- solve(data, ...)
+        x$setInverse(inv)
+        inv
 }
 
